@@ -3,6 +3,7 @@ function uiBindings() {
 }
 /**
  * Refrence - https://www.w3schools.com/js/tryit.asp?filename=tryjson_http
+ * Ajax call to get data from json
  */
 function getImagesData(url, callback) {
   var xhr = new XMLHttpRequest();
@@ -15,6 +16,8 @@ function getImagesData(url, callback) {
   xhr.open("GET", url, true);
   xhr.send();
 }
+
+// Ajax callback function
 function gridLoop(imagesLists) {
   for (var i = 0; i < imagesLists.length; i++) {
     createGrid(imagesLists[i]);
@@ -26,6 +29,7 @@ function gridLoop(imagesLists) {
   }, 0);
 }
 
+// create grid layout
 function createGrid(imagesList) {
   var gridRow = document.querySelector(".grid-row"),
     col = document.createElement("div");
@@ -54,8 +58,8 @@ function createGrid(imagesList) {
   gridRow.appendChild(col);
 }
 
+// Create Filter
 function createSelectFilter(selector, id) {
-  // Create Filter
   var selectedFilter = document.querySelectorAll(selector),
     sel = document.getElementById(id),
     filterId = sel.getAttribute("id"),
@@ -70,7 +74,6 @@ function createSelectFilter(selector, id) {
   }
 
   if (loopOver) {
-    // can we remeove if else
     for (var i = 0; i < loopOver.length; i++) {
       var opt = document.createElement("button");
       opt.appendChild(document.createTextNode(loopOver[i]));
@@ -106,6 +109,7 @@ function getSiblings(elem) {
   return siblings;
 }
 
+// btn click add remove active class
 function selectFilter() {
   var elem = this,
     currentSiblings = getSiblings(elem);
@@ -115,7 +119,7 @@ function selectFilter() {
       currentSiblings[i].classList.remove("active");
     }
   }
-  this.classList.add("active");
+  elem.classList.add("active");
   resetFilter(elem);
   filterItems(
     elem.getAttribute("data-filter"),
@@ -132,6 +136,7 @@ function resetFilter(currentFilter) {
   }
 }
 
+// reset another filter to default
 function resetOtherFilters(elem) {
   var resetFilterElement = getSiblings(
     document.getElementById(elem).firstChild
@@ -144,6 +149,7 @@ function resetOtherFilters(elem) {
   resetFilterElement[0].classList.add("active");
 }
 
+//  Hide show images based on selected filter
 function filterItems(filterData, filterType) {
   var filterValues = document.querySelectorAll("p#" + filterType + " > span"),
     allItems = document.querySelectorAll(".grid-row > .col");
@@ -160,7 +166,6 @@ function filterItems(filterData, filterType) {
     allItems[i].classList.add("hide");
   }
 
-  // Hide show images
   for (var i = 0; i < filterValues.length; i++) {
     var parentCol = filterValues[i].parentElement.parentElement.parentElement;
     if (filterValues[i].innerHTML.toLowerCase() == filterData.toLowerCase()) {
