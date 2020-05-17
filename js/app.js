@@ -60,52 +60,34 @@ function createSelectFilter(selector, id) {
     sel = document.getElementById(id),
     filterId = sel.getAttribute("id"),
     filterType = filterId.split("-", 1),
-    locationArr = [],
-    categoryArr = [],
-    loopOver;
-  // set data attributes for filter
+    loopOver = ["Show All"];
 
+  // set data attributes for filter
   for (var i = 0; i < selectedFilter.length; i++) {
-    if (filterType == "location") {
-      if (locationArr.indexOf(selectedFilter[i].innerHTML) === -1) {
-        locationArr.push(selectedFilter[i].innerHTML);
-        loopOver = locationArr;
-      }
-    } else if (filterType == "category") {
-      if (categoryArr.indexOf(selectedFilter[i].innerHTML)) {
-        categoryArr.push(selectedFilter[i].innerHTML);
-        loopOver = categoryArr;
-      }
+    if (loopOver.indexOf(selectedFilter[i].innerHTML) === -1) {
+      loopOver.push(selectedFilter[i].innerHTML);
     }
   }
+
   if (loopOver) {
-    // Add Default Values at first position
-    locationArr.unshift("Show All");
-    categoryArr.unshift("Show All");
+    // can we remeove if else
     for (var i = 0; i < loopOver.length; i++) {
       var opt = document.createElement("button");
+      opt.appendChild(document.createTextNode(loopOver[i]));
+      opt.className = "btn";
+      opt.setAttribute("data-filter", loopOver[i]);
+      opt.setAttribute("data-filter-type", filterType);
       if (i == 0) {
-        opt.appendChild(document.createTextNode("Show All"));
         opt.className = "btn active";
-        opt.setAttribute("data-filter", "Show All");
-        opt.setAttribute("data-filter-type", filterType);
-      } else {
-        opt.appendChild(document.createTextNode(loopOver[i]));
-        opt.className = "btn";
-        opt.setAttribute("data-filter", loopOver[i]);
-        opt.setAttribute("data-filter-type", filterType);
       }
       sel.appendChild(opt);
     }
   }
 
-  var locationFilter = document.querySelectorAll("#location-filter .btn"),
-    categoryFilter = document.querySelectorAll("#category-filter .btn");
-  for (var i = 0; i < locationFilter.length; i++) {
-    locationFilter[i].addEventListener("click", selectFilter);
-  }
-  for (var i = 0; i < categoryFilter.length; i++) {
-    categoryFilter[i].addEventListener("click", selectFilter);
+  var filterLogic = document.querySelectorAll("#" + id + " .btn");
+
+  for (var i = 0; i < filterLogic.length; i++) {
+    filterLogic[i].addEventListener("click", selectFilter);
   }
 }
 
@@ -116,7 +98,6 @@ function getSiblings(elem) {
   // Loop through each sibling and push to the array
   while (sibling) {
     // If the node is an element node, the nodeType property will return 1.
-
     if (sibling.nodeType === 1) {
       siblings.push(sibling);
     }
@@ -163,9 +144,8 @@ function resetOtherFilters(elem) {
   resetFilterElement[0].classList.add("active");
 }
 
-function filterItems(filterData) {
-  var locationValues = document.querySelectorAll("p#location > span"),
-    categoryValues = document.querySelectorAll("p#category > span"),
+function filterItems(filterData, filterType) {
+  var filterValues = document.querySelectorAll("p#" + filterType + " > span"),
     allItems = document.querySelectorAll(".grid-row > .col");
 
   for (var i = 0; i < allItems.length; i++) {
@@ -180,21 +160,10 @@ function filterItems(filterData) {
     allItems[i].classList.add("hide");
   }
 
-  // Location Hide show images
-  for (var i = 0; i < locationValues.length; i++) {
-    var parentCol = locationValues[i].parentElement.parentElement.parentElement;
-    if (locationValues[i].innerHTML.toLowerCase() == filterData.toLowerCase()) {
-      if (parentCol.classList.contains("hide")) {
-        parentCol.classList.remove("hide");
-        parentCol.classList.add("show");
-      }
-    }
-  }
-
-  // Category Hide show images
-  for (var i = 0; i < categoryValues.length; i++) {
-    var parentCol = categoryValues[i].parentElement.parentElement.parentElement;
-    if (categoryValues[i].innerHTML.toLowerCase() == filterData.toLowerCase()) {
+  // Hide show images
+  for (var i = 0; i < filterValues.length; i++) {
+    var parentCol = filterValues[i].parentElement.parentElement.parentElement;
+    if (filterValues[i].innerHTML.toLowerCase() == filterData.toLowerCase()) {
       if (parentCol.classList.contains("hide")) {
         parentCol.classList.remove("hide");
         parentCol.classList.add("show");
