@@ -13,8 +13,8 @@
       "title": "Cars",
       "photographer": "Ajay Maurya",
       "date": "2020-20-03",
-      "place": "Mumbai",
-      "category": "Outdoor"
+      "place": "Pune",
+      "category": "Indoor"
     },
     {
       "src": "https://i.picsum.photos/id/1068/200/200.jpg",
@@ -22,15 +22,15 @@
       "photographer": "Ajay Maurya",
       "date": "2020-20-03",
       "place": "Mumbai",
-      "category": "Outdoor"
+      "category": "Nature"
     },
     {
       "src": "https://i.picsum.photos/id/1062/200/200.jpg",
       "title": "Cars",
       "photographer": "Ajay Maurya",
       "date": "2020-20-03",
-      "place": "Mumbai",
-      "category": "Outdoor"
+      "place": "Bangalore",
+      "category": "Animal"
     },
     {
       "src": "https://i.picsum.photos/id/1084/200/200.jpg",
@@ -38,23 +38,23 @@
       "photographer": "Ajay Maurya",
       "date": "2020-20-03",
       "place": "Mumbai",
-      "category": "Outdoor"
+      "category": "Pets"
     },
     {
       "src": "https://i.picsum.photos/id/133/200/200.jpg",
       "title": "Cars",
       "photographer": "Ajay Maurya",
       "date": "2020-20-03",
-      "place": "Mumbai",
-      "category": "Outdoor"
+      "place": "Panvel",
+      "category": "Art"
     },
     {
       "src": "https://i.picsum.photos/id/163/200/200.jpg",
       "title": "Cars",
       "photographer": "Ajay Maurya",
       "date": "2020-20-03",
-      "place": "Mumbai",
-      "category": "Outdoor"
+      "place": "Saki Naka",
+      "category": "cars"
     },
     {
       "src": "https://i.picsum.photos/id/164/200/200.jpg",
@@ -62,15 +62,15 @@
       "photographer": "Ajay Maurya",
       "date": "2020-20-03",
       "place": "Mumbai",
-      "category": "Outdoor"
+      "category": "Roads"
     },
     {
       "src": "https://i.picsum.photos/id/155/200/200.jpg",
       "title": "Cars",
       "photographer": "Ajay Maurya",
       "date": "2020-20-03",
-      "place": "Mumbai",
-      "category": "Outdoor"
+      "place": "Malad",
+      "category": "Lights"
     }
   ]
 }

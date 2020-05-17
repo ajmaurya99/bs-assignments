@@ -1,10 +1,13 @@
 /*Vendor prefixes not added for now*/
+body {
+  background-color: #f1f1f1;
+}
 .container {
   display: table;
   margin: 0 auto;
 }
 .row {
-  max-width: 630px;
+  width: 630px;
   margin: 0 auto;
   display: table-cell;
   vertical-align: middle;
@@ -20,6 +23,7 @@
   margin: 5px;
   position: relative;
 }
+
 .col > img {
   width: 100%;
   height: auto;
@@ -63,4 +67,30 @@
   .row {
     height: 100vh;
   }
+}
+
+.row > .col.hide {
+  display: none;
+}
+.row > .col.show {
+  display: block;
+}
+
+/* Style the buttons */
+.btn {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  margin: 3px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #ddd;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
 }
