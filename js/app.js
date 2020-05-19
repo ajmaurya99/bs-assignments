@@ -75,25 +75,29 @@ var imagesObject = function () {
     var fillterDivRef = document.querySelector(".filter");
     fillterDivRef.addEventListener("click", function (e) {
       var currElem = e.target;
+      addActiveClass(currElem);
       if (currElem.classList.contains("filter-btn")) {
         // get data attributes for the clicked element
         // https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrForeignElement/dataset
         filterJson(currElem.dataset["filterType"], currElem.dataset["filter"]);
       }
     });
-    // addActiveClass(currElem);
   }
 
   function filterJson(type, value) {
     target[type] = value;
+
+    // making the copy of imageData
     target.data = imageData.slice();
     target.data = target.data.filter(function (elem) {
       // console.log(target);
+      // if both category and location is selected
       if (target.category && target.location) {
         return (
           elem.category === target.category && elem.location === target.location
         );
       } else {
+        // if any one is selected
         return elem[type] === value;
       }
     });
@@ -101,17 +105,30 @@ var imagesObject = function () {
     createGrid(target.data);
   }
 
-  // function addActiveClass(currElem) {
-  //   var allBtns = document.querySelectorAll(".btn");
-  //   for (var i = 0; i < allBtns.length; i++) {
-  //     allBtns[i].addEventListener("click", function (e) {
-  //       if (e.target.classList.contains("active")) {
-  //         e.target.classList.remove("active");
-  //       }
-  //     });
-  //   }
-  //   currElem.classList.add("active");
-  // }
+  function addActiveClass(currElem) {
+    var allBtns = getSiblings(currElem);
+    for (var i = 0; i < allBtns.length; i++) {
+      if (allBtns[i].classList.contains("active")) {
+        allBtns[i].classList.remove("active");
+      }
+    }
+    currElem.classList.add("active");
+  }
+
+  // get all sibling buttons
+  function getSiblings(elem) {
+    var siblings = [],
+      sibling = elem.parentNode.firstChild;
+    // Loop through each sibling and push to the array
+    while (sibling) {
+      // If the node is an element node, the nodeType property will return 1.
+      if (sibling.nodeType === 1) {
+        siblings.push(sibling);
+      }
+      sibling = sibling.nextSibling;
+    }
+    return siblings;
+  }
 
   // create grid layout
   function createGrid(imagesLists) {
@@ -143,6 +160,37 @@ var imagesObject = function () {
         "</div>";
       gridRow.appendChild(col);
     });
+
+    showSelectedValues(target);
+  }
+
+  function showSelectedValues(selectedValues) {
+    console.log(selectedValues["data"].length == 0);
+    var selectedDiv = document.querySelector(".selected-values");
+    if (selectedValues["data"].length == 0) {
+      selectedDiv.innerHTML = "";
+      var para = document.createElement("p");
+      para.appendChild(
+        document.createTextNode(
+          "No match found, Please try another combination"
+        )
+      );
+      selectedDiv.appendChild(para);
+    } else {
+      if (selectedValues["data"]) {
+        var selectedCat =
+          selectedValues["category"] == 0 ? " " : selectedValues["category"];
+        var selectedloc =
+          selectedValues["location"] == 0 ? " " : selectedValues["location"];
+        selectedDiv.innerHTML = "";
+        var para = document.createElement("p");
+
+        para.appendChild(
+          document.createTextNode(selectedloc + " , " + selectedCat)
+        );
+        selectedDiv.appendChild(para);
+      }
+    }
   }
 
   // select dropdown filters
@@ -179,8 +227,15 @@ var imagesObject = function () {
   function reverse(a, b) {
     return b.title.localeCompare(a.title);
   }
-  function showAll() {
+  function showAll(e) {
+    var allBtns = document.querySelectorAll(".btn");
+    for (var i = 0; i < allBtns.length; i++) {
+      if (allBtns[i].classList.contains("active")) {
+        allBtns[i].classList.remove("active");
+      }
+    }
     target.category = target.location = 0;
+    target.data = imageData;
     createGrid(imageData);
   }
   return {
