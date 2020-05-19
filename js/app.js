@@ -1,182 +1,193 @@
-function uiBindings() {
-  getImagesData("../js/app.json", gridLoop);
-}
-/**
- * Refrence - https://www.w3schools.com/js/tryit.asp?filename=tryjson_http
- * Ajax call to get data from json
- */
-function getImagesData(url, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      var imagesLists = JSON.parse(xhr.responseText);
-      callback(imagesLists.imagesJson);
+var imagesObject = function () {
+  var imageData, // global object
+    target = { location: 0, category: 0, data: false }; // target variable to store data for manipulation
+  function init() {
+    getImagesData("../js/app.json", gridLoop);
+  }
+
+  /**
+   * Refrence - https://www.w3schools.com/js/tryit.asp?filename=tryjson_http
+   * Ajax call to get data from json
+   */
+  function getImagesData(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        var imagesLists = JSON.parse(xhr.responseText);
+        callback(imagesLists.imagesJson);
+      }
+    };
+    xhr.open("GET", url, true);
+    xhr.send();
+  }
+
+  // Ajax callback function
+  function gridLoop(imagesLists) {
+    imageData = imagesLists;
+    var filterUniqueValues = getUniqueArray(imagesLists);
+    // create the filter buttons with the unique values returned from getUniqueArray
+    createFilterButtons(filterUniqueValues.location, "location");
+    createFilterButtons(filterUniqueValues.category, "category");
+    addEvent(); // Add Click event to filter btns
+    createGrid(imageData);
+  }
+
+  // Create Buttons from array list
+  function createFilterButtons(loopOver, filterType) {
+    if (loopOver.length > 0) {
+      var sel = document.getElementById(filterType + "-filter");
+      for (var i = 0; i < loopOver.length; i++) {
+        var opt = document.createElement("button");
+        opt.appendChild(document.createTextNode(loopOver[i]));
+        opt.className = "btn filter-btn";
+        opt.setAttribute("data-filter", loopOver[i]);
+        opt.setAttribute("data-filter-type", filterType);
+        sel.appendChild(opt);
+      }
     }
+  }
+
+  // get unique values from the json array
+  function getUniqueArray(imagesLists) {
+    var location = {},
+      category = {};
+    // get only json values.
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Object/values
+    Object.values(imagesLists).forEach(function (element) {
+      // if unique value save to array with key as name and value as 1
+      if (!(element.location in location)) {
+        location[element.location] = 1;
+      }
+      if (!(element.category in location)) {
+        category[element.category] = 1;
+      }
+    });
+    // get the keys in the newly created object
+    location = Object.keys(location);
+    category = Object.keys(category);
+    return {
+      location: location,
+      category: category,
+    };
+  }
+
+  function addEvent() {
+    var fillterDivRef = document.querySelector(".filter");
+    fillterDivRef.addEventListener("click", function (e) {
+      var currElem = e.target;
+      if (currElem.classList.contains("filter-btn")) {
+        // get data attributes for the clicked element
+        // https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrForeignElement/dataset
+        filterJson(currElem.dataset["filterType"], currElem.dataset["filter"]);
+      }
+    });
+    // addActiveClass(currElem);
+  }
+
+  function filterJson(type, value) {
+    target[type] = value;
+    target.data = imageData.slice();
+    target.data = target.data.filter(function (elem) {
+      // console.log(target);
+      if (target.category && target.location) {
+        return (
+          elem.category === target.category && elem.location === target.location
+        );
+      } else {
+        return elem[type] === value;
+      }
+    });
+    // console.log(target.data);
+    createGrid(target.data);
+  }
+
+  // function addActiveClass(currElem) {
+  //   var allBtns = document.querySelectorAll(".btn");
+  //   for (var i = 0; i < allBtns.length; i++) {
+  //     allBtns[i].addEventListener("click", function (e) {
+  //       if (e.target.classList.contains("active")) {
+  //         e.target.classList.remove("active");
+  //       }
+  //     });
+  //   }
+  //   currElem.classList.add("active");
+  // }
+
+  // create grid layout
+  function createGrid(imagesLists) {
+    var gridRow = document.querySelector(".grid-row");
+    gridRow.innerHTML = "";
+    imagesLists.forEach(function (imagesList) {
+      var col = document.createElement("div");
+      col.classList.add("col");
+      col.innerHTML =
+        '<img src="' +
+        imagesList.src +
+        '" />' +
+        '<div class="img-info">' +
+        '<p id="image-name">Image Name : <span>' +
+        imagesList.title +
+        "</span></p>" +
+        '<p id="photographer">Photographer : <span>' +
+        imagesList.photographer +
+        "</span></p>" +
+        '<p id="date">Date : <span>' +
+        imagesList.date +
+        "</span></p>" +
+        '<p id="location">Location : <span>' +
+        imagesList.location +
+        "</span></p>" +
+        '<p id="category">Category : <span>' +
+        imagesList.category +
+        "</span></p>" +
+        "</div>";
+      gridRow.appendChild(col);
+    });
+  }
+
+  // select dropdown filters
+  function filterData(filterBy) {
+    target.data = target.data || imageData.slice();
+    // console.log(target);
+    switch (filterBy) {
+      case "ascending":
+        target.data.sort(ascending);
+        break;
+      case "descending":
+        target.data.sort(descending);
+        break;
+      case "alphabetically":
+        target.data.sort(alphabetically);
+        break;
+      case "reverse":
+        target.data.sort(reverse);
+        break;
+      default:
+      // code block
+    }
+    createGrid(target.data);
+  }
+  function ascending(a, b) {
+    return new Date(a.date).getTime() - new Date(b.date).getTime();
+  }
+  function descending(a, b) {
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  }
+  function alphabetically(a, b) {
+    return a.title.localeCompare(b.title);
+  }
+  function reverse(a, b) {
+    return b.title.localeCompare(a.title);
+  }
+  function showAll() {
+    target.category = target.location = 0;
+    createGrid(imageData);
+  }
+  return {
+    init: init,
+    filterData: filterData,
+    showAll: showAll,
   };
-  xhr.open("GET", url, true);
-  xhr.send();
-}
-
-// Ajax callback function
-function gridLoop(imagesLists) {
-  for (var i = 0; i < imagesLists.length; i++) {
-    createGrid(imagesLists[i]);
-  }
-  // Image Filter
-  setTimeout(function () {
-    createSelectFilter("p#location > span", "location-filter");
-    createSelectFilter("p#category > span", "category-filter");
-  }, 0);
-}
-
-// create grid layout
-function createGrid(imagesList) {
-  var gridRow = document.querySelector(".grid-row"),
-    col = document.createElement("div");
-  col.classList.add("col");
-  col.innerHTML =
-    '<img src="' +
-    imagesList.src +
-    '" />' +
-    '<div class="img-info">' +
-    '<p id="image-name">Image Name : <span>' +
-    imagesList.title +
-    "</span></p>" +
-    '<p id="photographer">Photographer : <span>' +
-    imagesList.photographer +
-    "</span></p>" +
-    '<p id="date">Date : <span>' +
-    imagesList.date +
-    "</span></p>" +
-    '<p id="location">Location : <span>' +
-    imagesList.place +
-    "</span></p>" +
-    '<p id="category">Category : <span>' +
-    imagesList.category +
-    "</span></p>" +
-    "</div>";
-  gridRow.appendChild(col);
-}
-
-// Create Filter
-function createSelectFilter(selector, id) {
-  var selectedFilter = document.querySelectorAll(selector),
-    sel = document.getElementById(id),
-    filterId = sel.getAttribute("id"),
-    filterType = filterId.split("-", 1),
-    loopOver = ["Show All"];
-
-  // set data attributes for filter
-  for (var i = 0; i < selectedFilter.length; i++) {
-    if (loopOver.indexOf(selectedFilter[i].innerHTML) === -1) {
-      loopOver.push(selectedFilter[i].innerHTML);
-    }
-  }
-
-  if (loopOver) {
-    for (var i = 0; i < loopOver.length; i++) {
-      var opt = document.createElement("button");
-      opt.appendChild(document.createTextNode(loopOver[i]));
-      opt.className = "btn";
-      opt.setAttribute("data-filter", loopOver[i]);
-      opt.setAttribute("data-filter-type", filterType);
-      if (i == 0) {
-        opt.className = "btn active";
-      }
-      sel.appendChild(opt);
-    }
-  }
-
-  var filterLogic = document.querySelectorAll("#" + id + " .btn");
-
-  for (var i = 0; i < filterLogic.length; i++) {
-    filterLogic[i].addEventListener("click", selectFilter);
-  }
-}
-
-// get all sibling buttons
-function getSiblings(elem) {
-  var siblings = [],
-    sibling = elem.parentNode.firstChild;
-  // Loop through each sibling and push to the array
-  while (sibling) {
-    // If the node is an element node, the nodeType property will return 1.
-    if (sibling.nodeType === 1) {
-      siblings.push(sibling);
-    }
-    sibling = sibling.nextSibling;
-  }
-  return siblings;
-}
-
-// btn click add remove active class
-function selectFilter() {
-  var elem = this,
-    currentSiblings = getSiblings(elem);
-
-  for (var i = 0; i < currentSiblings.length; i++) {
-    if (currentSiblings[i].classList.contains("active")) {
-      currentSiblings[i].classList.remove("active");
-    }
-  }
-  elem.classList.add("active");
-  resetFilter(elem);
-  filterItems(
-    elem.getAttribute("data-filter"),
-    elem.getAttribute("data-filter-type")
-  );
-}
-
-function resetFilter(currentFilter) {
-  var getCurrentFilterId = currentFilter.parentElement.id;
-  if (getCurrentFilterId == "location-filter") {
-    resetOtherFilters("category-filter");
-  } else if (getCurrentFilterId == "category-filter") {
-    resetOtherFilters("location-filter");
-  }
-}
-
-// reset another filter to default
-function resetOtherFilters(elem) {
-  var resetFilterElement = getSiblings(
-    document.getElementById(elem).firstChild
-  );
-  for (var i = 0; i < resetFilterElement.length; i++) {
-    if (resetFilterElement[i].classList.contains("active")) {
-      resetFilterElement[i].classList.remove("active");
-    }
-  }
-  resetFilterElement[0].classList.add("active");
-}
-
-//  Hide show images based on selected filter
-function filterItems(filterData, filterType) {
-  var filterValues = document.querySelectorAll("p#" + filterType + " > span"),
-    allItems = document.querySelectorAll(".grid-row > .col");
-
-  for (var i = 0; i < allItems.length; i++) {
-    if (filterData.toLowerCase() == "show all") {
-      if (allItems[i].classList.contains("hide")) {
-        allItems[i].classList.remove("hide");
-        allItems[i].classList.add("show");
-      }
-    } else if (allItems[i].classList.contains("show")) {
-      allItems[i].classList.remove("show");
-    }
-    allItems[i].classList.add("hide");
-  }
-
-  for (var i = 0; i < filterValues.length; i++) {
-    var parentCol = filterValues[i].parentElement.parentElement.parentElement;
-    if (filterValues[i].innerHTML.toLowerCase() == filterData.toLowerCase()) {
-      if (parentCol.classList.contains("hide")) {
-        parentCol.classList.remove("hide");
-        parentCol.classList.add("show");
-      }
-    }
-  }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  uiBindings();
-});
+};
+var app = imagesObject();
+app.init();

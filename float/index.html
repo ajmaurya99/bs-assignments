@@ -13,6 +13,16 @@
   <body>
     <div class="filter">
       <div class="col">
+        <button
+          class="show-all btn active"
+          id="show-all"
+          data-filter="all"
+          onclick="app.showAll()"
+        >
+          Show All
+        </button>
+      </div>
+      <div class="col">
         <h2>Filter by Location:</h2>
         <div id="location-filter"></div>
       </div>
@@ -20,8 +30,21 @@
         <h2>Filter by Category:</h2>
         <div id="category-filter"></div>
       </div>
-      <!-- <div class="col"></div>
-      <div class="col"></div> -->
+      <div class="col">
+        <h2>Sort:</h2>
+        <select
+          id="sorting"
+          class="select-css"
+          onchange="app.filterData(this.value)"
+        >
+          <option value="default">Default</option>
+          <option value="ascending">Date Ascending</option>
+          <option value="descending">Date Descending</option>
+          <option value="alphabetically">A - Z</option>
+          <option value="reverse">Z - A</option>
+        </select>
+      </div>
+      <div class="col"></div>
     </div>
     <div class="container">
       <div class="row grid-row"></div>
