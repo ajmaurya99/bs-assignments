@@ -1,76 +1,76 @@
 {
   "imagesJson": [
     {
-      "src": "https://i.picsum.photos/id/111/200/200.jpg",
-      "title": "Cars",
+      "src": "https://i.picsum.photos/id/237/200/200.jpg",
+      "title": "Dog",
       "photographer": "Ajay Maurya",
-      "date": "2020-20-03",
-      "place": "Mumbai",
-      "category": "Outdoor"
+      "date": "2020-03-20",
+      "location": "Mumbai",
+      "category": "Animal"
     },
     {
       "src": "https://i.picsum.photos/id/111/200/200.jpg",
-      "title": "Cars",
+      "title": "Vehicle",
       "photographer": "Ajay Maurya",
-      "date": "2020-20-03",
-      "place": "Pune",
-      "category": "Indoor"
+      "date": "2020-03-18",
+      "location": "Pune",
+      "category": "Cars"
     },
     {
       "src": "https://i.picsum.photos/id/1068/200/200.jpg",
-      "title": "Cars",
+      "title": "Plant",
       "photographer": "Ajay Maurya",
-      "date": "2020-20-03",
-      "place": "Mumbai",
-      "category": "Nature"
+      "date": "2020-03-22",
+      "location": "Mumbai",
+      "category": "Indoor"
     },
     {
       "src": "https://i.picsum.photos/id/1062/200/200.jpg",
-      "title": "Cars",
+      "title": "Puppy",
       "photographer": "Ajay Maurya",
-      "date": "2020-20-03",
-      "place": "Bangalore",
+      "date": "2020-03-26",
+      "location": "Bangalore",
       "category": "Animal"
     },
     {
       "src": "https://i.picsum.photos/id/1084/200/200.jpg",
-      "title": "Cars",
+      "title": "Walrus",
       "photographer": "Ajay Maurya",
-      "date": "2020-20-03",
-      "place": "Mumbai",
-      "category": "Pets"
+      "date": "2020-03-30",
+      "location": "Mumbai",
+      "category": "Animal"
     },
     {
       "src": "https://i.picsum.photos/id/133/200/200.jpg",
-      "title": "Cars",
+      "title": "Vintage",
       "photographer": "Ajay Maurya",
-      "date": "2020-20-03",
-      "place": "Panvel",
-      "category": "Art"
+      "date": "2020-03-02",
+      "location": "Delhi",
+      "category": "Cars"
     },
     {
       "src": "https://i.picsum.photos/id/163/200/200.jpg",
-      "title": "Cars",
+      "title": "Pot",
       "photographer": "Ajay Maurya",
-      "date": "2020-20-03",
-      "place": "Saki Naka",
-      "category": "cars"
+      "date": "2020-03-27",
+      "location": "Bangalore",
+      "category": "Indoor"
     },
     {
       "src": "https://i.picsum.photos/id/164/200/200.jpg",
-      "title": "Cars",
+      "title": "Boat",
       "photographer": "Ajay Maurya",
-      "date": "2020-20-03",
-      "place": "Mumbai",
-      "category": "Roads"
+      "date": "2020-03-12",
+      "location": "Delhi",
+      "category": "Outdoor"
     },
     {
       "src": "https://i.picsum.photos/id/155/200/200.jpg",
-      "title": "Cars",
+      "title": "Railway",
       "photographer": "Ajay Maurya",
-      "date": "2020-20-03",
-      "place": "Malad",
-      "category": "Lights"
+      "date": "2020-03-01",
+      "location": "Delhi",
+      "category": "Outdoor"
     }
   ]
 }
