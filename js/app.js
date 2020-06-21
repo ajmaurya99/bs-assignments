@@ -286,7 +286,7 @@ var imagesObject = function () {
     modalImg.parentElement.parentElement.addEventListener("click", function (
       e
     ) {
-      if (e.target != modalImg) {
+      if (e.target == document.getElementById("modal")) {
         closeModal();
       }
     });
