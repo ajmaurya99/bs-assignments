@@ -1,5 +1,7 @@
 var imagesObject = function () {
   var imageData, // global object
+    modalImg = document.querySelector(".modal__img"),
+    preloadImages = new Array(),
     target = { location: 0, category: 0, data: false }; // target variable to store data for manipulation
   function init() {
     getImagesData("../js/app.json", gridLoop);
@@ -134,10 +136,21 @@ var imagesObject = function () {
   function createGrid(imagesLists) {
     var gridRow = document.querySelector(".grid-row");
     gridRow.innerHTML = "";
-    imagesLists.forEach(function (imagesList) {
+    imagesLists.forEach(function (imagesList, i) {
       var col = document.createElement("div");
       col.classList.add("col");
-      col.innerHTML =
+
+      var anchor = document.createElement("a");
+      anchor.href = "#";
+      anchor.onclick = function () {
+        app.openModal(this, imagesLists);
+      };
+      anchor.classList.add("open-modal");
+      anchor.setAttribute("data-zoom", imagesList.zoomsrc);
+      anchor.setAttribute("data-index", i);
+      col.appendChild(anchor);
+
+      anchor.innerHTML =
         '<img src="' +
         imagesList.src +
         '" />' +
@@ -159,6 +172,10 @@ var imagesObject = function () {
         "</span></p>" +
         "</div>";
       gridRow.appendChild(col);
+
+      // Preloading of Large Images
+      preloadImages[i] = new Image();
+      preloadImages[i].src = imagesList.zoomsrc;
     });
 
     showSelectedValues(target);
@@ -238,10 +255,91 @@ var imagesObject = function () {
     target.data = imageData;
     createGrid(imageData);
   }
+
+  /**
+   * Modal Js
+   */
+  var currentIndex;
+  function openModal(currentElement, currentImagesList) {
+    var currentZoomImage = currentElement.getAttribute("data-zoom");
+    currentIndex = currentElement.getAttribute("data-index");
+    modalImg.src = currentZoomImage;
+    document.getElementById("modal").style.display = "block";
+
+    document.querySelector(".prev").addEventListener(
+      "click",
+      function () {
+        navigateImage(currentImagesList, "prev");
+      },
+      false
+    );
+
+    document.querySelector(".next").addEventListener(
+      "click",
+      function () {
+        navigateImage(currentImagesList, "next");
+      },
+      false
+    );
+
+    // close modal if clicked anywhere else
+    modalImg.parentElement.parentElement.addEventListener("click", function (
+      e
+    ) {
+      if (e.target != modalImg) {
+        closeModal();
+      }
+    });
+  }
+
+  // close Modal
+  function closeModal() {
+    document.getElementById("modal").style.display = "none";
+  }
+
+  // Prev Next Navigation
+  function navigateImage(currentImagesLists, direction) {
+    var nextIndex;
+    if (direction == "next") {
+      nextIndex =
+        currentIndex < currentImagesLists.length - 1 ? +currentIndex + 1 : 0;
+    } else {
+      nextIndex =
+        currentIndex > 0 ? +currentIndex - 1 : currentImagesLists.length - 1;
+    }
+
+    console.log(currentIndex, nextIndex, currentImagesLists);
+    currentIndex = nextIndex;
+    modalImg.src = currentImagesLists[currentIndex].zoomsrc;
+    // console.log(nextIndex, currentIndex);
+  }
+
+  // Keyboard Navigation for Slider, close on esc
+  document.body.addEventListener(
+    "keydown",
+    function (e) {
+      var code = e.keyCode;
+      var evt = new Event("click");
+
+      if (code == 39) {
+        document.querySelector(".next").dispatchEvent(evt);
+      }
+      if (code == 37) {
+        document.querySelector(".prev").dispatchEvent(evt);
+      }
+      if (code == 27) {
+        closeModal();
+      }
+    },
+    false
+  );
+
   return {
     init: init,
     filterData: filterData,
     showAll: showAll,
+    openModal: openModal,
+    closeModal: closeModal,
   };
 };
 var app = imagesObject();

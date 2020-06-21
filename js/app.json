@@ -1,7 +1,8 @@
 {
   "imagesJson": [
     {
-      "src": "https://i.picsum.photos/id/237/200/200.jpg",
+      "src": "https://picsum.photos/id/237/200",
+      "zoomsrc": "https://picsum.photos/id/237/1000/500",
       "title": "Dog",
       "photographer": "Ajay Maurya",
       "date": "2020-03-20",
@@ -9,7 +10,8 @@
       "category": "Animal"
     },
     {
-      "src": "https://i.picsum.photos/id/111/200/200.jpg",
+      "src": "https://picsum.photos/id/111/200",
+      "zoomsrc": "https://picsum.photos/id/111/1000/500",
       "title": "Vehicle",
       "photographer": "Ajay Maurya",
       "date": "2020-03-18",
@@ -17,7 +19,8 @@
       "category": "Cars"
     },
     {
-      "src": "https://i.picsum.photos/id/1068/200/200.jpg",
+      "src": "https://picsum.photos/id/1068/200",
+      "zoomsrc": "https://picsum.photos/id/1068/1000/500",
       "title": "Plant",
       "photographer": "Ajay Maurya",
       "date": "2020-03-22",
@@ -25,7 +28,8 @@
       "category": "Indoor"
     },
     {
-      "src": "https://i.picsum.photos/id/1062/200/200.jpg",
+      "src": "https://picsum.photos/id/1062/200",
+      "zoomsrc": "https://picsum.photos/id/1062/1000/500",
       "title": "Puppy",
       "photographer": "Ajay Maurya",
       "date": "2020-03-26",
@@ -33,7 +37,8 @@
       "category": "Animal"
     },
     {
-      "src": "https://i.picsum.photos/id/1084/200/200.jpg",
+      "src": "https://picsum.photos/id/1084/200",
+      "zoomsrc": "https://picsum.photos/id/1084/1000/500",
       "title": "Walrus",
       "photographer": "Ajay Maurya",
       "date": "2020-03-30",
@@ -41,7 +46,8 @@
       "category": "Animal"
     },
     {
-      "src": "https://i.picsum.photos/id/133/200/200.jpg",
+      "src": "https://picsum.photos/id/133/200",
+      "zoomsrc": "https://picsum.photos/id/133/1000/500",
       "title": "Vintage",
       "photographer": "Ajay Maurya",
       "date": "2020-03-02",
@@ -49,7 +55,8 @@
       "category": "Cars"
     },
     {
-      "src": "https://i.picsum.photos/id/163/200/200.jpg",
+      "src": "https://picsum.photos/id/163/200",
+      "zoomsrc": "https://picsum.photos/id/163/1000/500",
       "title": "Pot",
       "photographer": "Ajay Maurya",
       "date": "2020-03-27",
@@ -57,7 +64,8 @@
       "category": "Indoor"
     },
     {
-      "src": "https://i.picsum.photos/id/164/200/200.jpg",
+      "src": "https://picsum.photos/id/164/200",
+      "zoomsrc": "https://picsum.photos/id/164/1000/500",
       "title": "Boat",
       "photographer": "Ajay Maurya",
       "date": "2020-03-12",
@@ -65,7 +73,8 @@
       "category": "Outdoor"
     },
     {
-      "src": "https://i.picsum.photos/id/155/200/200.jpg",
+      "src": "https://picsum.photos/id/155/200",
+      "zoomsrc": "https://picsum.photos/id/155/1000/500",
       "title": "Railway",
       "photographer": "Ajay Maurya",
       "date": "2020-03-01",
