@@ -4,8 +4,9 @@ node_js:
 cache:
   directories:
     - node_modules
-script:
-  - gulp
+before_script:
+  - npm install -g gulp-cli
+script: gulp
 deploy:
   provider: pages
   skip_cleanup: true
