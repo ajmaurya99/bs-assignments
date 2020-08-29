@@ -43,16 +43,18 @@ function processCss() {
 exports.processJs = processJs;
 exports.processCss = processCss;
 
+exports.default = parallel(processCss, processJs);
+
 /**
  * The default gulp function.
  * watcher added for js and css files.
  * @ignoreInitial : Runs for the first time also when gulp command is run
  */
-exports.default = function () {
+/* exports.default = function () {
   watch("js/*.js", { events: "all", ignoreInitial: false }, processJs);
   watch(
     ["css-grid/*.css", "flexbox-grid/*.css", "float/*.css"],
     { events: "all", ignoreInitial: false },
     processCss
   );
-};
+}; */
