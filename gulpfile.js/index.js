@@ -5,11 +5,11 @@
  * @gulp-minify-css Minify css files
  * @gulp-clean delete compiled files
  */
-var { gulp, src, dest, watch, lastRun, series, parallel } = require("gulp");
-var rename = require("gulp-rename");
-var uglify = require("gulp-uglify");
-var minify = require("gulp-minify-css");
-var clean = require("gulp-clean");
+var { gulp, src, dest, watch, lastRun, series, parallel } = require("gulp"),
+  rename = require("gulp-rename"),
+  uglify = require("gulp-uglify"),
+  minify = require("gulp-minify-css"),
+  clean = require("gulp-clean");
 
 /**
  * Perform JS uglification
