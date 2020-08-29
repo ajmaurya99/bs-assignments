@@ -1,0 +1,85 @@
+{
+  "imagesJson": [
+    {
+      "src": "https://picsum.photos/id/237/200",
+      "zoomsrc": "https://picsum.photos/id/237/1000/500",
+      "title": "Dog",
+      "photographer": "Ajay Maurya",
+      "date": "2020-03-20",
+      "location": "Mumbai",
+      "category": "Animal"
+    },
+    {
+      "src": "https://picsum.photos/id/111/200",
+      "zoomsrc": "https://picsum.photos/id/111/1000/500",
+      "title": "Vehicle",
+      "photographer": "Ajay Maurya",
+      "date": "2020-03-18",
+      "location": "Pune",
+      "category": "Cars"
+    },
+    {
+      "src": "https://picsum.photos/id/1068/200",
+      "zoomsrc": "https://picsum.photos/id/1068/1000/500",
+      "title": "Plant",
+      "photographer": "Ajay Maurya",
+      "date": "2020-03-22",
+      "location": "Mumbai",
+      "category": "Indoor"
+    },
+    {
+      "src": "https://picsum.photos/id/1062/200",
+      "zoomsrc": "https://picsum.photos/id/1062/1000/500",
+      "title": "Puppy",
+      "photographer": "Ajay Maurya",
+      "date": "2020-03-26",
+      "location": "Bangalore",
+      "category": "Animal"
+    },
+    {
+      "src": "https://picsum.photos/id/1084/200",
+      "zoomsrc": "https://picsum.photos/id/1084/1000/500",
+      "title": "Walrus",
+      "photographer": "Ajay Maurya",
+      "date": "2020-03-30",
+      "location": "Mumbai",
+      "category": "Animal"
+    },
+    {
+      "src": "https://picsum.photos/id/133/200",
+      "zoomsrc": "https://picsum.photos/id/133/1000/500",
+      "title": "Vintage",
+      "photographer": "Ajay Maurya",
+      "date": "2020-03-02",
+      "location": "Delhi",
+      "category": "Cars"
+    },
+    {
+      "src": "https://picsum.photos/id/163/200",
+      "zoomsrc": "https://picsum.photos/id/163/1000/500",
+      "title": "Pot",
+      "photographer": "Ajay Maurya",
+      "date": "2020-03-27",
+      "location": "Bangalore",
+      "category": "Indoor"
+    },
+    {
+      "src": "https://picsum.photos/id/164/200",
+      "zoomsrc": "https://picsum.photos/id/164/1000/500",
+      "title": "Boat",
+      "photographer": "Ajay Maurya",
+      "date": "2020-03-12",
+      "location": "Delhi",
+      "category": "Outdoor"
+    },
+    {
+      "src": "https://picsum.photos/id/155/200",
+      "zoomsrc": "https://picsum.photos/id/155/1000/500",
+      "title": "Railway",
+      "photographer": "Ajay Maurya",
+      "date": "2020-03-01",
+      "location": "Delhi",
+      "category": "Outdoor"
+    }
+  ]
+}
